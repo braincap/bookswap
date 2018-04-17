@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const bookSchema = new Schema({
@@ -7,7 +7,8 @@ const bookSchema = new Schema({
   subtitle: String,
   authors: [],
   smallThumbnail: String,
-  _user: { type: Schema.Types.ObjectId, ref: "User" }
+  _user: { type: Schema.Types.ObjectId, ref: 'User' },
+  _requestors: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
-mongoose.model("books", bookSchema);
+mongoose.model('books', bookSchema);

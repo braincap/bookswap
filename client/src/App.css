@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 ul {
@@ -31,10 +31,10 @@ a.button {
   color: white;
   background: var(--base);
   border: 1px solid white;
-  border-radius: 3px;
+  border-radius: 5%;
   display: inline-block;
   text-decoration: none;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 a.button:hover,
@@ -99,18 +99,44 @@ a.button {
 }
 
 .left-menu {
+  height: 100%;
   display: flex;
   align-items: center;
 }
 
-.left-menu a:not(:first-child) {
+.left-menu > *:not(:first-child) {
   margin-left: 1em;
+}
+
+.nav-filter {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+input + label {
+  margin-left: 0.5em;
+  color: white;
+}
+
+.nav-filter:hover,
+.nav-filter.checked {
+  background-color: var(--yellow);
+  color: black;
+}
+
+.nav-filter:hover label,
+.nav-filter.checked label {
+  color: var(--base);
 }
 
 .search-box {
   padding: 0.2em;
   outline: 0;
   border: 0;
+  min-width: 15em;
 }
 
 .search-form {
@@ -125,18 +151,21 @@ a.button {
   height: 100%;
   background-color: var(--yellow);
   color: var(--base);
+  display: inline-flex;
+  flex-shrink: 1;
 }
 
 .search-form button:hover {
   background-color: var(--accent);
   color: white;
+  cursor: pointer;
 }
 
 .search-form .search-list {
   position: absolute;
   left: 0;
   padding: 0;
-  z-index: 10;
+  z-index: 200;
 }
 
 .book-card {
@@ -153,6 +182,15 @@ a.button {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+.book-card.my_book {
+  border: 2px solid var(--base);
+}
+.book-card.my_book:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  transform: perspective(1px) scale(1.1);
+  border: 2px solid var(--base);
+}
+
 .book-card.suggestion .subtitle {
   display: none;
 }
@@ -164,7 +202,7 @@ a.button {
 
 .book-card:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transform: scale(1.1);
+  transform: perspective(1px) scale(1.1);
   border: 2px solid var(--accent);
 }
 
@@ -173,15 +211,32 @@ a.button {
 }
 
 .book-card .book-details {
-  margin-left: 1em;
+  margin: 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .book-details .subtitle,
-.book-details .authors {
+.book-details .authors,
+.book-details .book-status {
   margin-top: 0.5em;
+}
+
+.book-card:hover .book-status {
+  font-weight: bold;
+}
+
+.requested {
+  color: var(--accent);
+}
+
+.owned {
+  color: var(--base);
+}
+
+.new {
+  color: var(--accent);
 }
 
 .content {
@@ -194,6 +249,7 @@ a.button {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
 }
 
 .green {

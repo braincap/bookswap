@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import _ from "lodash";
-import SearchRecommendation from "./SearchRecommendation";
-import * as actions from "../actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import _ from 'lodash';
+import SearchRecommendation from './SearchRecommendation';
+import * as actions from '../actions';
 
 class Header extends Component {
   state = {
-    searchBoxText: "",
+    searchBoxText: '',
     searchRecommendations: [],
     selectedRecommendation: {},
     searchInputFocus: false
@@ -19,15 +19,19 @@ class Header extends Component {
     if (!this.state.selectedRecommendation.title) {
       return;
     }
-    const res = await axios("/api/submit_book", {
-      method: "post",
+    const res = await axios('/api/submit_book', {
+      method: 'post',
       data: this.state.selectedRecommendation,
       withCredentials: true
     });
     console.log(`${res.data.title} added to your account!`);
-    this.setState({ searchBoxText: "Submitted!" });
+    this.setState({ searchBoxText: 'Submitted!' });
     setTimeout(() => {
-      this.setState({ searchBoxText: "", selectedRecommendation: {} });
+      this.setState({
+        searchBoxText: '',
+        selectedRecommendation: {},
+        searchRecommendations: []
+      });
     }, 3000);
     this.props.fetchBooks();
   };
@@ -52,6 +56,10 @@ class Header extends Component {
     );
   };
 
+  myBooksCheckHandler = e => {
+    this.props.setMyBooks(!this.props.book.isMyBooks);
+  };
+
   renderHeaderItems() {
     switch (this.props.auth) {
       case null:
@@ -68,9 +76,9 @@ class Header extends Component {
             <form onSubmit={this.submitBook}>
               <input
                 type="text"
-                disabled={this.state.searchBoxText === "Submitted!"}
+                disabled={this.state.searchBoxText === 'Submitted!'}
                 className={`search-box ${
-                  this.state.searchBoxText === "Submitted!" ? "green" : ""
+                  this.state.searchBoxText === 'Submitted!' ? 'green' : ''
                 }`}
                 placeholder="Add a book"
                 value={this.state.searchBoxText}
@@ -97,7 +105,7 @@ class Header extends Component {
                 }}
               />
               <button
-                disabled={this.state.searchBoxText === "Submitted!"}
+                disabled={this.state.searchBoxText === 'Submitted!'}
                 type="submit"
               >
                 Submit
@@ -121,12 +129,26 @@ class Header extends Component {
       <nav>
         <div className="left-menu">
           <div className="logo">
-            <Link to="/">
+            <Link onClick={() => this.props.setMyBooks(false)} to="/">
               <h2>BookSwap</h2>
             </Link>
           </div>
-          <Link to="/">All Books</Link>
-          <Link to="/mybooks">My Books</Link>
+          <Link onClick={() => this.props.setMyBooks(false)} to="/">
+            All Books
+          </Link>
+          <div
+            className={`nav-filter ${
+              this.props.book.isMyBooks ? 'checked' : ''
+            }`}
+            onClick={this.myBooksCheckHandler}
+          >
+            <input
+              id="my_books"
+              type="checkbox"
+              checked={this.props.book.isMyBooks}
+            />
+            <label htmlFor="my_book">My Books</label>
+          </div>
         </div>
         {this.renderHeaderItems()}
       </nav>

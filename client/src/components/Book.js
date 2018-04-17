@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Book extends Component {
   render() {
@@ -14,7 +14,7 @@ class Book extends Component {
         <img
           src={
             smallThumbnail ||
-            "https://res.cloudinary.com/dxmi9d3vj/image/upload/v1521302915/book-3088777_640_rid3cg.png"
+            'https://res.cloudinary.com/dxmi9d3vj/image/upload/v1521302915/book-3088777_640_rid3cg.png'
           }
           alt="Book cover"
         />
@@ -22,9 +22,20 @@ class Book extends Component {
           <h5 className="title">{title}</h5>
           <h6 className="subtitle">{subtitle}</h6>
           {authors && authors.length ? (
-            <h6 className="authors">{authors.join(" | ")}</h6>
+            <h6 className="authors">{authors.join(' | ')}</h6>
           ) : (
-            ""
+            ''
+          )}
+          {this.props.section === 'content' ? (
+            <h5 className={`book-status ${this.props.status}`}>
+              {this.props.status === 'new'
+                ? 'Click to Request!'
+                : this.props.status === 'requested'
+                  ? 'Click to Delete Request!'
+                  : 'Owned! Click to Unlist'}
+            </h5>
+          ) : (
+            ''
           )}
         </div>
       </div>
