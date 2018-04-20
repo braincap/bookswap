@@ -61,7 +61,7 @@ class Header extends Component {
   };
 
   renderHeaderItems() {
-    switch (this.props.auth) {
+    switch (this.props.auth._id) {
       case null:
         return [];
       case false:
