@@ -1,5 +1,7 @@
 const express = require('express');
 const passport = require('passport');
+
+const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -10,6 +12,7 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
+app.use(morgan('combined'));
 
 app.use(
   cookieSession({
