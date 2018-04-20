@@ -17,8 +17,8 @@ module.exports = app => {
 
   app.get('/api/logout', (req, res) => {
     console.log('TEST', req.user);
-    req.logOut();
-    res.redirect('/');
+    req.logout();
+    res.redirect('https://fcc-bookswap-braincap.herokuapp.com');
   });
 
   app.get('/api/current_user', requireAuth, (req, res) => {
