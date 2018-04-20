@@ -31,12 +31,12 @@ module.exports = app => {
 
   app.post('/api/update_profile', requireAuth, async (req, res) => {
     const { name, city, state, contact } = req.body;
-
+    console.log(req.user.contact);
     const user = await User.findByIdAndUpdate(
       req.user.id,
       { name, city, state, contact },
       { new: true }
     );
-    res.send(req.user);
+    res.send(user);
   });
 };
