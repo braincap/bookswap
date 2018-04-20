@@ -1,5 +1,5 @@
-const axios = require("axios");
-const keys = require("../config/keys");
+const axios = require('axios');
+const keys = require('../config/keys');
 
 module.exports = async query => {
   const books = await axios.get(
@@ -15,7 +15,7 @@ module.exports = async query => {
           id,
           volumeInfo: {
             title,
-            subtitle = "",
+            subtitle = '',
             authors = [],
             imageLinks: { smallThumbnail } = {}
           }

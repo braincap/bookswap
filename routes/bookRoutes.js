@@ -34,7 +34,7 @@ module.exports = app => {
 
     for (var i = 0; i < book._requestors.length; i++) {
       if (book._requestors[0].toString() === req.user.id) {
-        (requestorId);
+        requestorId;
         res.status(500).send('Already requested');
         return;
       }
