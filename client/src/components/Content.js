@@ -27,7 +27,7 @@ class Content extends Component {
   };
 
   renderContentItems() {
-    switch (this.props.auth) {
+    switch (this.props.auth._id) {
       case null:
         return [];
       case false:
