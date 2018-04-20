@@ -71,7 +71,6 @@ class Requests extends Component {
                               contact
                             } = this.state.userIdMap[requestor];
                             let returnText = '';
-                            (returnText);
 
                             if (name) {
                               returnText = name;
