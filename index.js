@@ -26,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+console.log('1) JT Setting Routes');
 require('./routes/authRoutes')(app);
 require('./routes/bookRoutes')(app);
 /* 
