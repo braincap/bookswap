@@ -12,6 +12,7 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
+app.use(morgan('combined'));
 
 app.use(
   cookieSession({
@@ -20,26 +21,22 @@ app.use(
   })
 );
 
-// app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-console.log('1) JT Setting Routes');
 require('./routes/authRoutes')(app);
 require('./routes/bookRoutes')(app);
-/* 
+
 if (process.env.NODE_ENV === 'production') {
-  console.log(process.env.NODE_ENV);
   app.use(express.static('client/build'));
 
   const path = require('path');
   app.get('*', (req, res) => {
-    console.log('RETURN STAR');
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
-} */
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);

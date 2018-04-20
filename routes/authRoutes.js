@@ -15,19 +15,12 @@ module.exports = app => {
     (req, res) => res.redirect('/')
   );
 
-  app.get('/test', (req, res) => {
-    console.log('test');
-    res.send('LOL');
-  });
-
   app.get('/api/logout', (req, res) => {
-    console.log('2) JT LOGOUT ROUTE');
     req.logout();
     res.redirect('/');
   });
 
   app.get('/api/current_user', requireAuth, (req, res) => {
-    console.log('3) JT CURRENT USER');
     res.send(req.user);
   });
 
