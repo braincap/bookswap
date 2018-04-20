@@ -28,7 +28,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/bookRoutes')(app);
-
+/* 
 if (process.env.NODE_ENV === 'production') {
   console.log(process.env.NODE_ENV);
   app.use(express.static('client/build'));
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
     console.log('RETURN STAR');
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
-}
+} */
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
