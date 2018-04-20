@@ -21,16 +21,16 @@ module.exports = app => {
     res.redirect('https://fcc-bookswap-braincap.herokuapp.com');
   });
 
-  app.get('/api/current_user', requireAuth, (req, res) => {
+  app.get('/api/current_user', /* requireAuth, */ (req, res) => {
     res.send(req.user);
   });
 
-  app.get('/api/user_id_details', requireAuth, async (req, res) => {
+  app.get('/api/user_id_details', /* requireAuth, */ async (req, res) => {
     const user = await User.find({}, '_id name city state contact');
     res.send(user);
   });
 
-  app.post('/api/update_profile', requireAuth, async (req, res) => {
+  app.post('/api/update_profile', /* requireAuth, */ async (req, res) => {
     const { name, city, state, contact } = req.body;
 
     const user = await User.findByIdAndUpdate(

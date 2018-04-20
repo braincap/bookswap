@@ -12,7 +12,6 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
-app.use(morgan('combined'));
 
 app.use(
   cookieSession({
@@ -21,6 +20,7 @@ app.use(
   })
 );
 
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
@@ -30,6 +30,7 @@ require('./routes/authRoutes')(app);
 require('./routes/bookRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
+  console.log(process.env.NODE_ENV);
   app.use(express.static('client/build'));
 
   const path = require('path');
