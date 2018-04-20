@@ -1,23 +1,41 @@
-const passport = require("passport");
+const mongoose = require('mongoose');
+const passport = require('passport');
+const User = mongoose.model('users');
 
 module.exports = app => {
   app.get(
-    "/auth/google",
-    passport.authenticate("google", { scope: ["profile", "email"] })
+    '/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
   );
 
   app.get(
-    "/auth/google/callback",
-    passport.authenticate("google"),
-    (req, res) => res.redirect("/")
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => res.redirect('/')
   );
 
-  app.get("/api/logout", (req, res) => {
+  app.get('/api/logout', (req, res) => {
     req.logout();
-    res.redirect("/");
+    res.redirect('/');
   });
 
-  app.get("/api/current_user", (req, res) => {
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
+
+  app.get('/api/user_id_details', async (req, res) => {
+    const user = await User.find({}, '_id name city state contact');
+    res.send(user);
+  });
+
+  app.post('/api/update_profile', async (req, res) => {
+    const { name, city, state, contact } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { name, city, state, contact },
+      { new: true }
+    );
     res.send(req.user);
   });
 };

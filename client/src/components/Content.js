@@ -9,6 +9,12 @@ class Content extends Component {
   }
 
   handleRequestBook = (bookRecordId, requestorId) => {
+    if (!this.props.auth.contact) {
+      alert(
+        'Please enter your contact details (email or phone) in profile section before requesting a book'
+      );
+      return;
+    }
     this.props.requestBook(bookRecordId, requestorId);
   };
 

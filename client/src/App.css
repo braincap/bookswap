@@ -13,6 +13,12 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
 }
@@ -20,6 +26,7 @@ body {
 ul {
   list-style-type: none;
   text-align: left;
+  padding: 0;
 }
 
 a {
@@ -98,6 +105,35 @@ a.button {
   align-items: center;
 }
 
+.right-menu {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+a.profile {
+  margin-right: 1em;
+}
+
+.profile-page {
+  height: 100%;
+  width: 100%;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.profile-form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-form > div {
+  margin-top: 1em;
+}
+
 .left-menu {
   height: 100%;
   display: flex;
@@ -116,20 +152,20 @@ a.button {
   padding-right: 0.2em;
 }
 
-input + label {
+.nav-filter label {
   margin-left: 0.5em;
   color: white;
+}
+
+.nav-filter:hover label,
+.nav-filter.checked label {
+  color: var(--base);
 }
 
 .nav-filter:hover,
 .nav-filter.checked {
   background-color: var(--yellow);
   color: black;
-}
-
-.nav-filter:hover label,
-.nav-filter.checked label {
-  color: var(--base);
 }
 
 .search-box {
@@ -161,6 +197,21 @@ input + label {
   cursor: pointer;
 }
 
+.profile-form button {
+  margin-top: 1em;
+  background: transparent;
+  border: 0;
+  background-color: var(--yellow);
+  color: var(--base);
+  display: inline-flex;
+}
+
+.profile-form button:hover {
+  background-color: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
 .search-form .search-list {
   position: absolute;
   left: 0;
@@ -179,7 +230,7 @@ input + label {
   padding: 0.2em;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .book-card.my_book {
@@ -187,7 +238,7 @@ input + label {
 }
 .book-card.my_book:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transform: perspective(1px) scale(1.1);
+  transform: scale(1.1);
   border: 2px solid var(--base);
 }
 
@@ -202,7 +253,7 @@ input + label {
 
 .book-card:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  transform: perspective(1px) scale(1.1);
+  transform: scale(1.1);
   border: 2px solid var(--accent);
 }
 
@@ -244,6 +295,10 @@ input + label {
   position: relative;
 }
 
+.user {
+  display: flex;
+}
+
 .dim {
   position: absolute;
   width: 100%;
@@ -260,4 +315,45 @@ input + label {
   display: flex;
   flex-wrap: wrap;
   padding: 0em 5em;
+}
+
+.all-requests {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 16px;
+}
+.requests-by-me,
+.requests-for-me {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.requests-by-me h2,
+.requests-for-me h2 {
+  padding: 1em 2em;
+  background-color: var(--base);
+  color: white;
+}
+
+.requests-by-me ul li,
+.requests-for-me ul li {
+  margin-bottom: 2em;
+}
+
+.requestor-names {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.2em;
+}
+
+.requestor-names li:not(:last-child) {
+  padding-right: 1em;
+}
+
+.requestor-names-items {
+  display: flex;
+  flex-direction: column;
 }

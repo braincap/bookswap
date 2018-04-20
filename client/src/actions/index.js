@@ -5,7 +5,8 @@ import {
   MY_BOOKS,
   REQUEST_BOOK,
   DELETE_REQUEST,
-  UNLIST_BOOK
+  UNLIST_BOOK,
+  UPDATE_PROFILE
 } from './types';
 import axios from 'axios';
 
@@ -70,4 +71,19 @@ export const unlistBook = (bookRecordId, requestorId) => async dispatch => {
     return;
   }
   dispatch({ type: UNLIST_BOOK, payload: res.data });
+};
+
+export const updateProfile = (name, city, state, contact) => async dispatch => {
+  let res;
+  try {
+    res = await axios('/api/update_profile', {
+      method: 'post',
+      data: { name, city, state, contact },
+      withCredentials: true
+    });
+  } catch (err) {
+    console.log(err);
+    return;
+  }
+  dispatch({ type: UPDATE_PROFILE, payload: res.data });
 };

@@ -5,3 +5,4 @@ export const MY_BOOKS = 'my_books';
 export const REQUEST_BOOK = 'request_book';
 export const DELETE_REQUEST = 'delete_request';
 export const UNLIST_BOOK = 'unlist_book';
+export const UPDATE_PROFILE = 'update_profile';

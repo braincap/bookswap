@@ -117,9 +117,14 @@ class Header extends Component {
               searchRecommendations={this.state.searchRecommendations}
             />
           </div>,
-          <a key={1} className="button" href="/api/logout">
-            Logout
-          </a>
+          <div key={1} className="right-menu">
+            <Link key={1} className="profile" to="/profile">
+              Profile
+            </Link>
+            <a key={2} className="button" href="/api/logout">
+              Logout
+            </a>
+          </div>
         ];
     }
   }
@@ -149,6 +154,7 @@ class Header extends Component {
             />
             <label htmlFor="my_book">My Books</label>
           </div>
+          <Link to="/requests">Requests</Link>
         </div>
         {this.renderHeaderItems()}
       </nav>
