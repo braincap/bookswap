@@ -46,7 +46,7 @@ class Profile extends Component {
               <input
                 type="text"
                 name="name"
-                placeholder={this.props.auth.name}
+                placeholder={this.props.auth && this.props.auth.name}
                 value={this.state.name}
                 onChange={e => this.setState({ name: e.target.value })}
               />
@@ -56,7 +56,7 @@ class Profile extends Component {
               <input
                 type="text"
                 name="city"
-                placeholder={this.props.auth.city}
+                placeholder={this.props.auth && this.props.auth.city}
                 value={this.state.city}
                 onChange={e => this.setState({ city: e.target.value })}
               />
@@ -66,7 +66,7 @@ class Profile extends Component {
               <input
                 type="text"
                 name="state"
-                placeholder={this.props.auth.state}
+                placeholder={this.props.auth && this.props.auth.state}
                 value={this.state.state}
                 onChange={e => this.setState({ state: e.target.value })}
               />
@@ -77,7 +77,9 @@ class Profile extends Component {
                 type="text"
                 name="contact"
                 placeholder={
-                  this.props.auth.contact && this.props.auth.contact.length
+                  this.props.auth &&
+                  this.props.auth.contact &&
+                  this.props.auth.contact.length
                     ? this.props.auth.contact
                     : 'Email or Phone'
                 }

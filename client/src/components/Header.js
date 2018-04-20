@@ -61,71 +61,67 @@ class Header extends Component {
   };
 
   renderHeaderItems() {
-    switch (this.props.auth._id) {
-      case null:
-        return [];
-      case false:
-        return [
-          <a className="button" href="/auth/google">
-            <span>Login with Google</span>
-          </a>
-        ];
-      default:
-        return [
-          <div key={0} className="search-form">
-            <form onSubmit={this.submitBook}>
-              <input
-                type="text"
-                disabled={this.state.searchBoxText === 'Submitted!'}
-                className={`search-box ${
-                  this.state.searchBoxText === 'Submitted!' ? 'green' : ''
-                }`}
-                placeholder="Add a book"
-                value={this.state.searchBoxText}
-                onFocus={() => {
-                  this.setState({ searchInputFocus: true });
-                  this.props.setSearchInAction(true);
-                }}
-                onBlur={() => {
-                  this.state.searchBoxText.length
-                    ? this.setState({ searchInputFocus: false })
-                    : this.setState({
-                        searchInputFocus: false,
-                        selectedRecommendation: {}
-                      });
-                  this.props.setSearchInAction(false);
-                }}
-                onChange={async e => {
-                  this.setState(
-                    { searchBoxText: e.target.value.trim() },
-                    () => {
-                      this.bookSearchAxios(this.state.searchBoxText);
-                    }
-                  );
-                }}
-              />
-              <button
-                disabled={this.state.searchBoxText === 'Submitted!'}
-                type="submit"
-              >
-                Submit
-              </button>
-            </form>
-            <SearchRecommendation
-              searchInputFocus={this.state.searchInputFocus}
-              bookListClickHandler={this.bookListClickHandler}
-              searchRecommendations={this.state.searchRecommendations}
+    if (this.props.auth === null) {
+      return [];
+    } else if (!this.props.auth) {
+      return [
+        <a className="button" href="/auth/google">
+          <span>Login with Google</span>
+        </a>
+      ];
+    } else {
+      return [
+        <div key={0} className="search-form">
+          <form onSubmit={this.submitBook}>
+            <input
+              type="text"
+              disabled={this.state.searchBoxText === 'Submitted!'}
+              className={`search-box ${
+                this.state.searchBoxText === 'Submitted!' ? 'green' : ''
+              }`}
+              placeholder="Add a book"
+              value={this.state.searchBoxText}
+              onFocus={() => {
+                this.setState({ searchInputFocus: true });
+                this.props.setSearchInAction(true);
+              }}
+              onBlur={() => {
+                this.state.searchBoxText.length
+                  ? this.setState({ searchInputFocus: false })
+                  : this.setState({
+                      searchInputFocus: false,
+                      selectedRecommendation: {}
+                    });
+                this.props.setSearchInAction(false);
+              }}
+              onChange={async e => {
+                this.setState({ searchBoxText: e.target.value.trim() }, () => {
+                  this.bookSearchAxios(this.state.searchBoxText);
+                });
+              }}
             />
-          </div>,
-          <div key={1} className="right-menu">
-            <Link key={1} className="profile" to="/profile">
-              Profile
-            </Link>
-            <a key={2} className="button" href="/api/logout">
-              Logout
-            </a>
-          </div>
-        ];
+            <button
+              disabled={this.state.searchBoxText === 'Submitted!'}
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+          <SearchRecommendation
+            searchInputFocus={this.state.searchInputFocus}
+            bookListClickHandler={this.bookListClickHandler}
+            searchRecommendations={this.state.searchRecommendations}
+          />
+        </div>,
+        <div key={1} className="right-menu">
+          <Link key={1} className="profile" to="/profile">
+            Profile
+          </Link>
+          <a key={2} className="button" href="/api/logout">
+            Logout
+          </a>
+        </div>
+      ];
     }
   }
 
