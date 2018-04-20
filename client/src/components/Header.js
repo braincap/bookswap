@@ -138,14 +138,14 @@ class Header extends Component {
               <h2>BookSwap</h2>
             </Link>
           </div>
-          {this.props.auth._id ? (
+          {this.props.auth && this.props.auth._id ? (
             <Link onClick={() => this.props.setMyBooks(false)} to="/">
               All Books
             </Link>
           ) : (
             ''
           )}
-          {this.props.auth._id ? (
+          {this.props.auth && this.props.auth._id ? (
             <div
               className={`nav-filter ${
                 this.props.book.isMyBooks ? 'checked' : ''
@@ -162,7 +162,11 @@ class Header extends Component {
           ) : (
             ''
           )}
-          {this.props.auth._id ? <Link to="/requests">Requests</Link> : ''}
+          {this.props.auth && this.props.auth._id ? (
+            <Link to="/requests">Requests</Link>
+          ) : (
+            ''
+          )}
         </div>
         {this.renderHeaderItems()}
       </nav>
