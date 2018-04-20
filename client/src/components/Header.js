@@ -138,23 +138,31 @@ class Header extends Component {
               <h2>BookSwap</h2>
             </Link>
           </div>
-          <Link onClick={() => this.props.setMyBooks(false)} to="/">
-            All Books
-          </Link>
-          <div
-            className={`nav-filter ${
-              this.props.book.isMyBooks ? 'checked' : ''
-            }`}
-            onClick={this.myBooksCheckHandler}
-          >
-            <input
-              id="my_books"
-              type="checkbox"
-              checked={this.props.book.isMyBooks}
-            />
-            <label htmlFor="my_book">My Books</label>
-          </div>
-          <Link to="/requests">Requests</Link>
+          {this.props.auth ? (
+            <Link onClick={() => this.props.setMyBooks(false)} to="/">
+              All Books
+            </Link>
+          ) : (
+            ''
+          )}
+          {this.props.auth ? (
+            <div
+              className={`nav-filter ${
+                this.props.book.isMyBooks ? 'checked' : ''
+              }`}
+              onClick={this.myBooksCheckHandler}
+            >
+              <input
+                id="my_books"
+                type="checkbox"
+                checked={this.props.book.isMyBooks}
+              />
+              <label htmlFor="my_book">My Books</label>
+            </div>
+          ) : (
+            ''
+          )}
+          {this.props.auth ? <Link to="/requests">Requests</Link> : ''}
         </div>
         {this.renderHeaderItems()}
       </nav>

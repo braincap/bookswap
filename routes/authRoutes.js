@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = mongoose.model('users');
+const requireAuth = require('../middleware/requireAuth');
 
 module.exports = app => {
   app.get(
@@ -14,21 +15,21 @@ module.exports = app => {
     (req, res) => res.redirect('/')
   );
 
-  app.get('/api/logout', (req, res) => {
+  app.get('/api/logout', requireAuth, (req, res) => {
     req.logout();
     res.redirect('/');
   });
 
-  app.get('/api/current_user', (req, res) => {
+  app.get('/api/current_user', requireAuth, (req, res) => {
     res.send(req.user);
   });
 
-  app.get('/api/user_id_details', async (req, res) => {
+  app.get('/api/user_id_details', requireAuth, async (req, res) => {
     const user = await User.find({}, '_id name city state contact');
     res.send(user);
   });
 
-  app.post('/api/update_profile', async (req, res) => {
+  app.post('/api/update_profile', requireAuth, async (req, res) => {
     const { name, city, state, contact } = req.body;
 
     const user = await User.findByIdAndUpdate(
