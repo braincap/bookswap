@@ -20,7 +20,7 @@ class Profile extends Component {
     });
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     this.props.updateProfile(
       this.state.name,
@@ -28,6 +28,7 @@ class Profile extends Component {
       this.state.state,
       this.state.contact
     );
+    alert('Profile updated!');
   };
 
   render() {
